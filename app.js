@@ -1,20 +1,22 @@
+import Video from "./components/Video.js";
 import Questionnaire from "./models/Questionnaire.js";
 import questionsParCategories from "./questionsParCategories.js";
+
 
 var Login = {
     view: function() {
         return m(".login", [
             m("h2", Questionnaire.titre),
-            m("input[type=text]", {
-                oninput: function (e) { Questionnaire.setUsername(e.target.value) },
-                value: Questionnaire.username
-            }),
-            m("input[type=password]", {
-                oninput: function (e) { Questionnaire.setPassword(e.target.value) },
-                value: Questionnaire.password
-            }),
+            m(Video, {url: "https://www.w3schools.com/tags/movie.mp4"}),
+            m("p", Questionnaire.choix.map((e) => {})),
+            m(".categories", Questionnaire.choix.map(function (categorie, i) {
+                return m("button", {
+                    onclick: function() {
+                        Questionnaire.setCategorie(categorie[0])
+                    }
+                }, `${categorie}`)
+            })),
             m("button", {
-                disabled: !Questionnaire.canSubmit(),
                 onclick: Questionnaire.afficheQuiz
             }, "Login")
         ])

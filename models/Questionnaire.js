@@ -1,29 +1,25 @@
 import questionsParCategories from "../questionsParCategories.js"
 
-var Questionnaire = {
-    username: "",
-    password: "",
-    titre: "Pas de titre",
+const Questionnaire = {
+    titre: "",
     categorie: null,
     indexQuestion: 0,
-    setUsername: function(value) {
-        Questionnaire.username = value
+    choix: [],
+    setCategorie: function(valeur) {
+        Questionnaire.categorie = valeur
     },
-    setPassword: function(value) {
-        Questionnaire.password = value
+    setTitre: function(valeur) {
+        Questionnaire.titre = valeur
     },
-    setTitre: function(value) {
-        Questionnaire.titre = value
-    },
-    setCategorie: function(value) {
-        Questionnaire.categorie = value
-    },
-    canSubmit: function() {
-        return Questionnaire.username !== "" && Questionnaire.password !== ""
+    setChoix: function (valeur) {
+        const MixArray = questionsParCategories[`${Questionnaire.categorie}`][Questionnaire.indexQuestion].choix
+        const string = MixArray.toString();
+        const listeChoix = string.split(',  ');
+        Questionnaire.choix = listeChoix
     },
     afficheQuiz: function(params) {
         Questionnaire.setTitre(questionsParCategories[`${Questionnaire.categorie}`][Questionnaire.indexQuestion].question);
-        console.log(questionsParCategories[`${Questionnaire.categorie}`]);
+        Questionnaire.setChoix(questionsParCategories[`${Questionnaire.categorie}`][Questionnaire.indexQuestion].choix);
         Questionnaire.indexQuestion++
     }
 }
