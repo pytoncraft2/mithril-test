@@ -1,5 +1,5 @@
 import Test from "../components/Titre.js";
-import questions from "../questions.js";
+import questions from "../questionsParCategorie.js";
 
 const quizParCategorie = questions.reduce((acc, obj) => {
     return { ...acc, [obj.categorie]: [...acc[obj.categorie] || [], obj] }
